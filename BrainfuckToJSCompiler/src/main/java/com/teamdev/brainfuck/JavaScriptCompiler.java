@@ -7,7 +7,7 @@ import java.util.List;
 
 public class JavaScriptCompiler {
 
-    public static final String PROGRAM ="+++++++++++++++++++++++++++++++++++++++++++++" +
+    public static final String PROGRAM =/*"+++++++++++++++++++++++++++++++++++++++++++++" +
             " +++++++++++++++++++++++++++.+++++++++++++++++" +
             " ++++++++++++.+++++++..+++.-------------------" +
             " ---------------------------------------------" +
@@ -15,9 +15,9 @@ public class JavaScriptCompiler {
             " ++++++++++++++++++++++++++.++++++++++++++++++" +
             " ++++++.+++.------.--------.------------------" +
             " ---------------------------------------------" +
-            " ----.-----------------------.";/*"++++++++[>++++[>++>+++>+++>+<<<<-]" +
+            " ----.-----------------------.";*/"++++++++[>++++[>++>+++>+++>+<<<<-]" +
             ">+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------" +
-            ".>>+.>++.";*/
+            ".>>+.>++.";
 
     public void compile(String brainfuckProgram, File outputJavaScriptFile) {
 
@@ -43,7 +43,7 @@ public class JavaScriptCompiler {
         for (Command command : optimizedCommands) {
             command.accept(jsCodeGenerationVisitor);
         }
-        
+
         try {
             FileWriter fileWriter = new FileWriter(outputJavaScriptFile);
             fileWriter.write(jsCodeGenerationVisitor.getJsCode());
