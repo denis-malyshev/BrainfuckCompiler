@@ -1,3 +1,4 @@
 BrainfuckToJSCompiler/out/
 BrainfuckToJSCompiler/*.idea/
 BrainfuckToJSCompiler/BrainfuckToJSCompiler.iml
+BrainfuckToJSCompiler/target/
