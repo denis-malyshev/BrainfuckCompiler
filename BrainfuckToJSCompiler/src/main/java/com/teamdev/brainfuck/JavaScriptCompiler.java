@@ -7,7 +7,7 @@ import java.util.List;
 
 public class JavaScriptCompiler {
 
-    public static final String PROGRAM =/*"+++++++++++++++++++++++++++++++++++++++++++++" +
+    public static final String PROGRAM ="+++++++++++++++++++++++++++++++++++++++++++++" +
             " +++++++++++++++++++++++++++.+++++++++++++++++" +
             " ++++++++++++.+++++++..+++.-------------------" +
             " ---------------------------------------------" +
@@ -15,9 +15,9 @@ public class JavaScriptCompiler {
             " ++++++++++++++++++++++++++.++++++++++++++++++" +
             " ++++++.+++.------.--------.------------------" +
             " ---------------------------------------------" +
-            " ----.-----------------------.";*/"++++++++[>++++[>++>+++>+++>+<<<<-]" +
+            " ----.-----------------------.";/*"++++++++[>++++[>++>+++>+++>+<<<<-]" +
             ">+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------" +
-            ".>>+.>++.";
+            ".>>+.>++.";*/
 
     public void compile(String brainfuckProgram, File outputJavaScriptFile) {
 
@@ -32,16 +32,15 @@ public class JavaScriptCompiler {
         final List<Command> optimizedCommands =
                 optimizationVisitor.getOptimizedCommands();
 
-        // Just for fun!
         final ExecutionVisitor executionVisitor = new ExecutionVisitor();
         for (Command command : optimizedCommands) {
             command.accept(executionVisitor);
         }
 
-        // todo: generate JavaScript code (implement JavaScript code generation visitor)
         final JSCodeGenerationVisitor jsCodeGenerationVisitor=new JSCodeGenerationVisitor();
         for (Command command : optimizedCommands) {
             command.accept(jsCodeGenerationVisitor);
+            System.out.println(command.getClass().getName());
         }
 
         try {

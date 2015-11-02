@@ -46,15 +46,14 @@ public class OptimizationVisitor implements CommandVisitor {
     }
 
     public void visit(LoopCommand command) {
-        optimization(command);
+        /*optimization(command);
         final List<Command> innerCommands = command.getInnerCommands();
         counts=0;
         for (Command innerCommand:innerCommands) {
             optimization(innerCommand);
         }
-        System.out.println("End Loop");
         counts=1;
-        optimization(command);
+        optimization(command);*/
     }
 
     public void visit(OptimizedCommand command) {
