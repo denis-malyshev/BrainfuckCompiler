@@ -43,6 +43,7 @@ public class JavaScriptCompiler {
         for (Command command : optimizedCommands) {
             command.accept(jsCodeGenerationVisitor);
         }
+        
         try {
             FileWriter fileWriter = new FileWriter(outputJavaScriptFile);
             fileWriter.write(jsCodeGenerationVisitor.getJsCode());
