@@ -1,8 +1,7 @@
 package com.teamdev.brainfuck;
 
 
-public class OptimizedCommand  {
-
+public class OptimizedCommand {
     private Command repeatCommand;
     private int counts;
 

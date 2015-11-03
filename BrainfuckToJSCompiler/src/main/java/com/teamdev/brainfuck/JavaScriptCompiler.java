@@ -7,9 +7,17 @@ import java.util.List;
 
 public class JavaScriptCompiler {
 
-    public static final String PROGRAM = "++++++++[>++++[>++>+++>+++>+<<<<-]" +
+    public static final String PROGRAM = "+++++++++++++++++++++++++++++++++++++++++++++" +
+            " +++++++++++++++++++++++++++.+++++++++++++++++" +
+            " ++++++++++++.+++++++..+++.-------------------" +
+            " ---------------------------------------------" +
+            " ---------------.+++++++++++++++++++++++++++++" +
+            " ++++++++++++++++++++++++++.++++++++++++++++++" +
+            " ++++++.+++.------.--------.------------------" +
+            " ---------------------------------------------" +
+            " ----.-----------------------.";/*"++++++++[>++++[>++>+++>+++>+<<<<-]" +
             ">+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------" +
-            ".>>+.>++.";
+            ".>>+.>++.";*/
 
     public void compile(String brainfuckProgram, File outputJavaScriptFile) {
 
@@ -24,18 +32,18 @@ public class JavaScriptCompiler {
         final List<OptimizedCommand> optimizedCommands =
                 optimizationVisitor.getOptimizedCommands();
 
-        // Just for fun!
         final ExecutionVisitor executionVisitor = new ExecutionVisitor();
         for (OptimizedCommand command : optimizedCommands) {
-            for (int i = 0; i < command.getCounts(); i++)
+            for (int i = 0; i < command.getCounts(); i++) {
                 command.getOptimizedCommand().accept(executionVisitor);
+            }
         }
 
-        // todo: generate JavaScript code (implement JavaScript code generation visitor)
         final JSCodeGenerationVisitor jsCodeGenerationVisitor = new JSCodeGenerationVisitor();
         for (OptimizedCommand command : optimizedCommands) {
             command.getOptimizedCommand().accept(jsCodeGenerationVisitor);
         }
+
         try {
             FileWriter fileWriter = new FileWriter(outputJavaScriptFile);
             fileWriter.write(jsCodeGenerationVisitor.getJsCode());

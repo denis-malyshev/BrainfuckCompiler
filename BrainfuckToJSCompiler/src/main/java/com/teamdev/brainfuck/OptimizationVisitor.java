@@ -25,32 +25,26 @@ public class OptimizationVisitor implements CommandVisitor {
         return optimizedCommands;
     }
 
-    @Override
     public void visit(MoveForwardCommand command) {
         optimization(command);
     }
 
-    @Override
     public void visit(MoveBackwardCommand command) {
         optimization(command);
     }
 
-    @Override
     public void visit(IncrementCommand command) {
         optimization(command);
     }
 
-    @Override
     public void visit(DecrementCommand command) {
         optimization(command);
     }
 
-    @Override
     public void visit(PrintCommand command) {
         optimization(command);
     }
 
-    @Override
     public void visit(LoopCommand command) {
         for (Command innerCommand : command.getInnerCommands()) {
             optimization(innerCommand);
