@@ -7,27 +7,29 @@ public class ExecutionVisitor implements CommandVisitor {
 
 
     public void visit(MoveForwardCommand command) {
-        context.movePointerForward();
+        context.movePointerForward(command.getRepeatCounts());
     }
 
 
     public void visit(MoveBackwardCommand command) {
-        context.movePointerBackward();
+        context.movePointerBackward(command.getRepeatCounts());
     }
 
 
     public void visit(IncrementCommand command) {
-        context.incrementCurrentValue();
+        context.incrementCurrentValue(command.getRepeatCounts());
     }
 
 
     public void visit(DecrementCommand command) {
-        context.decrementCurrentValue();
+        context.decrementCurrentValue(command.getRepeatCounts());
     }
 
 
     public void visit(PrintCommand command) {
-        System.out.print((char)context.getCurrentValue());
+        for (int i = 0; i < command.getRepeatCounts(); i++) {
+            System.out.print((char) context.getCurrentValue());
+        }
     }
 
 

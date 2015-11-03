@@ -5,6 +5,10 @@ import java.util.List;
 
 public class LoopCommand implements Command {
 
+    public void addRepeat() {
+
+    }
+
     private final List<Command> innerCommands;
 
     public LoopCommand(List<Command> innerCommands) {
@@ -15,7 +19,6 @@ public class LoopCommand implements Command {
         return innerCommands;
     }
 
-    @Override
     public void accept(CommandVisitor visitor) {
         visitor.visit(this);
     }

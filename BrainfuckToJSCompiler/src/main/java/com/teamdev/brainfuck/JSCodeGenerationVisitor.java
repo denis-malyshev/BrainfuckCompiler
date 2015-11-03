@@ -13,32 +13,26 @@ public class JSCodeGenerationVisitor implements CommandVisitor {
         return jsCode;
     }
 
-    @Override
     public void visit(MoveForwardCommand command) {
 
     }
 
-    @Override
     public void visit(MoveBackwardCommand command) {
 
     }
 
-    @Override
     public void visit(IncrementCommand command) {
 
     }
 
-    @Override
     public void visit(DecrementCommand command) {
 
     }
 
-    @Override
     public void visit(PrintCommand command) {
 
     }
 
-    @Override
     public void visit(LoopCommand command) {
 
     }

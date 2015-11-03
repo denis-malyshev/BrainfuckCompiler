@@ -5,23 +5,25 @@ import java.util.List;
 
 public class OptimizationVisitor implements CommandVisitor {
 
-    private final List<OptimizedCommand> optimizedCommands = new ArrayList();
-    private Command lastCommand;
-    private int counts;
+    private final List<Command> optimizedCommands = new ArrayList();
 
     private void optimization(Command currentCommand) {
-        if (counts == 0)
-            lastCommand = currentCommand;
-        if (currentCommand.getClass() == lastCommand.getClass()) {
-            counts++;
-        } else {
-            optimizedCommands.add(new OptimizedCommand(lastCommand, counts));
-            lastCommand = currentCommand;
-            counts = 1;
-        }
+        if (optimizedCommands.isEmpty())
+            optimizedCommands.add(currentCommand);
+        else if (optimizedCommands.get(optimizedCommands.size()-1).getClass()==currentCommand.getClass())
+            optimizedCommands.get(optimizedCommands.size()-1).addRepeat();
+        else optimizedCommands.add(currentCommand);
     }
 
-    public List<OptimizedCommand> getOptimizedCommands() {
+    private void optimizationLoop(Command currentCommand, List<Command> temp) {
+        if (temp.isEmpty())
+            temp.add(currentCommand);
+        else if (temp.get(temp.size()-1).getClass()==currentCommand.getClass())
+            temp.get(temp.size()-1).addRepeat();
+        else temp.add(currentCommand);
+    }
+
+    public List<Command> getOptimizedCommands() {
         return optimizedCommands;
     }
 
@@ -46,9 +48,11 @@ public class OptimizationVisitor implements CommandVisitor {
     }
 
     public void visit(LoopCommand command) {
+        List<Command> temp=new ArrayList<Command>();
         for (Command innerCommand : command.getInnerCommands()) {
-            optimization(innerCommand);
+            optimizationLoop(innerCommand,temp);
         }
-        optimization(command);
+        command=new LoopCommand(temp);
+        optimizedCommands.add(command);
     }
 }

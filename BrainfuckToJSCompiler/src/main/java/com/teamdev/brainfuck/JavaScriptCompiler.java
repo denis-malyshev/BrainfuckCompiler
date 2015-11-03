@@ -7,17 +7,9 @@ import java.util.List;
 
 public class JavaScriptCompiler {
 
-    public static final String PROGRAM = "+++++++++++++++++++++++++++++++++++++++++++++" +
-            " +++++++++++++++++++++++++++.+++++++++++++++++" +
-            " ++++++++++++.+++++++..+++.-------------------" +
-            " ---------------------------------------------" +
-            " ---------------.+++++++++++++++++++++++++++++" +
-            " ++++++++++++++++++++++++++.++++++++++++++++++" +
-            " ++++++.+++.------.--------.------------------" +
-            " ---------------------------------------------" +
-            " ----.-----------------------.";/*"++++++++[>++++[>++>+++>+++>+<<<<-]" +
+    public static final String PROGRAM ="++++++++[>++++[>++>+++>+++>+<<<<-]" +
             ">+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------" +
-            ".>>+.>++.";*/
+            ".>>+.>++.";
 
     public void compile(String brainfuckProgram, File outputJavaScriptFile) {
 
@@ -29,19 +21,17 @@ public class JavaScriptCompiler {
             command.accept(optimizationVisitor);
         }
 
-        final List<OptimizedCommand> optimizedCommands =
+        final List<Command> optimizedCommands =
                 optimizationVisitor.getOptimizedCommands();
 
         final ExecutionVisitor executionVisitor = new ExecutionVisitor();
-        for (OptimizedCommand command : optimizedCommands) {
-            for (int i = 0; i < command.getCounts(); i++) {
-                command.getOptimizedCommand().accept(executionVisitor);
-            }
+        for (Command command : optimizedCommands) {
+            command.accept(executionVisitor);
         }
 
         final JSCodeGenerationVisitor jsCodeGenerationVisitor = new JSCodeGenerationVisitor();
-        for (OptimizedCommand command : optimizedCommands) {
-            command.getOptimizedCommand().accept(jsCodeGenerationVisitor);
+        for (Command command : optimizedCommands) {
+            command.accept(jsCodeGenerationVisitor);
         }
 
         try {

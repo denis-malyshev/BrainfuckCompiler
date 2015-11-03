@@ -47,8 +47,16 @@ public class ExecutionContext {
         memory[pointer]++;
     }
 
+    public void incrementCurrentValue(int value) {
+        memory[pointer]+=value;
+    }
+
     public void decrementCurrentValue() {
         memory[pointer]--;
+    }
+
+    public void decrementCurrentValue(int value) {
+        memory[pointer]-=value;
     }
 
 }
