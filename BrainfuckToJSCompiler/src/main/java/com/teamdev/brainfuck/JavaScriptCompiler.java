@@ -34,9 +34,14 @@ public class JavaScriptCompiler {
             command.accept(jsCodeGenerationVisitor);
         }
 
+        final JSCode jsCode=new JSCode();
+        jsCode.declareFunction("callMessage");
+        jsCode.setBodyFunctions(jsCodeGenerationVisitor.getJsCode());
+        jsCode.endFunction();
+
         try {
             FileWriter fileWriter = new FileWriter(outputJavaScriptFile);
-            fileWriter.write(jsCodeGenerationVisitor.getJsCode());
+            fileWriter.write(jsCode.getWorkArea().toString());
             fileWriter.close();
             fileWriter = new FileWriter("run.html");
             fileWriter.write("<!DOCTYPE html>\n" +

@@ -10,7 +10,7 @@ public class JSCodeGenerationVisitor implements CommandVisitor {
     private String openLoop = "\nwhile(memory[pointer]!=0) {";
     private String endLoop = "\n}";
     private String endLine = ";";
-    private String result = "\nresult+=String.fromCharCode(memory[pointer]);\nalert(result);";
+    private String result = "\nresult+=String.fromCharCode(memory[pointer]);";
 
     public JSCodeGenerationVisitor() {
         this.jsCode = "var memory = Array.apply(null, new Array(30000)).map(function () {return 0;});\n" +
@@ -49,6 +49,5 @@ public class JSCodeGenerationVisitor implements CommandVisitor {
             innerCommand.accept(this);
         }
         jsCode += endLoop;
-
     }
 }
