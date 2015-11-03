@@ -5,7 +5,7 @@ import java.util.List;
 
 public class OptimizationVisitor implements CommandVisitor {
 
-    private final List<Command> optimizedCommands = new ArrayList();
+    private final List<OptimizedCommand> optimizedCommands = new ArrayList();
     private Command lastCommand;
     private int counts;
 
@@ -21,42 +21,40 @@ public class OptimizationVisitor implements CommandVisitor {
         }
     }
 
-    public List<Command> getOptimizedCommands() {
+    public List<OptimizedCommand> getOptimizedCommands() {
         return optimizedCommands;
     }
 
+    @Override
     public void visit(MoveForwardCommand command) {
         optimization(command);
     }
 
+    @Override
     public void visit(MoveBackwardCommand command) {
         optimization(command);
     }
 
+    @Override
     public void visit(IncrementCommand command) {
         optimization(command);
     }
 
+    @Override
     public void visit(DecrementCommand command) {
         optimization(command);
     }
 
+    @Override
     public void visit(PrintCommand command) {
         optimization(command);
     }
 
+    @Override
     public void visit(LoopCommand command) {
-        /*optimization(command);
-        final List<Command> innerCommands = command.getInnerCommands();
-        counts=0;
-        for (Command innerCommand:innerCommands) {
+        for (Command innerCommand : command.getInnerCommands()) {
             optimization(innerCommand);
         }
-        counts=1;
-        optimization(command);*/
-    }
-
-    public void visit(OptimizedCommand command) {
-        optimizedCommands.add(command);
+        optimization(command);
     }
 }

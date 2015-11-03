@@ -13,6 +13,4 @@ public interface CommandVisitor {
     void visit(PrintCommand command);
 
     void visit(LoopCommand command);
-
-    void visit(OptimizedCommand command);
 }

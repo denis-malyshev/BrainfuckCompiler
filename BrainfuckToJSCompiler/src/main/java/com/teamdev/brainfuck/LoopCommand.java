@@ -15,6 +15,7 @@ public class LoopCommand implements Command {
         return innerCommands;
     }
 
+    @Override
     public void accept(CommandVisitor visitor) {
         visitor.visit(this);
     }

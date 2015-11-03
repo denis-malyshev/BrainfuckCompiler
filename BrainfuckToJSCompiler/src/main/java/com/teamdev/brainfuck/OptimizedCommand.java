@@ -1,7 +1,8 @@
 package com.teamdev.brainfuck;
 
 
-public class OptimizedCommand implements Command {
+public class OptimizedCommand  {
+
     private Command repeatCommand;
     private int counts;
 
@@ -18,7 +19,4 @@ public class OptimizedCommand implements Command {
         return repeatCommand;
     }
 
-    public void accept(CommandVisitor visitor) {
-        visitor.visit(this);
-    }
 }

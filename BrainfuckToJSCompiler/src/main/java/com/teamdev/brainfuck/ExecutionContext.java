@@ -15,8 +15,24 @@ public class ExecutionContext {
         }
     }
 
+    public void movePointerForward(int value) {
+        pointer+=value;
+
+        if (pointer >= MEMORY_SIZE) {
+            throw new IllegalStateException("Pointer is out of memory: " + pointer);
+        }
+    }
+
     public void movePointerBackward() {
         pointer--;
+
+        if (pointer < 0) {
+            throw new IllegalStateException("Pointer is out of memory: " + pointer);
+        }
+    }
+
+    public void movePointerBackward(int value) {
+        pointer-=value;
 
         if (pointer < 0) {
             throw new IllegalStateException("Pointer is out of memory: " + pointer);
