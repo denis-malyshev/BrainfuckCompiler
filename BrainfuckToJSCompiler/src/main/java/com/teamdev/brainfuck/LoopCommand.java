@@ -5,8 +5,10 @@ import java.util.List;
 
 public class LoopCommand implements Command {
 
-    public void addRepeat() {
+    private int repeatCounts=1;
 
+    public void addRepeat() {
+        repeatCounts++;
     }
 
     private final List<Command> innerCommands;
