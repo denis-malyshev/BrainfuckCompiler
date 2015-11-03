@@ -10,16 +10,16 @@ public class OptimizationVisitor implements CommandVisitor {
     private void optimization(Command currentCommand) {
         if (optimizedCommands.isEmpty())
             optimizedCommands.add(currentCommand);
-        else if (optimizedCommands.get(optimizedCommands.size()-1).getClass()==currentCommand.getClass())
-            optimizedCommands.get(optimizedCommands.size()-1).addRepeat();
+        else if (optimizedCommands.get(optimizedCommands.size() - 1).getClass() == currentCommand.getClass())
+            optimizedCommands.get(optimizedCommands.size() - 1).addRepeat();
         else optimizedCommands.add(currentCommand);
     }
 
     private void optimizationLoop(Command currentCommand, List<Command> temp) {
         if (temp.isEmpty())
             temp.add(currentCommand);
-        else if (temp.get(temp.size()-1).getClass()==currentCommand.getClass())
-            temp.get(temp.size()-1).addRepeat();
+        else if (temp.get(temp.size() - 1).getClass() == currentCommand.getClass())
+            temp.get(temp.size() - 1).addRepeat();
         else temp.add(currentCommand);
     }
 
@@ -48,11 +48,23 @@ public class OptimizationVisitor implements CommandVisitor {
     }
 
     public void visit(LoopCommand command) {
-        List<Command> temp=new ArrayList<Command>();
+        List<Command> temp = new ArrayList<Command>();
         for (Command innerCommand : command.getInnerCommands()) {
-            optimizationLoop(innerCommand,temp);
+            if (innerCommand.getClass() == LoopCommand.class)
+                optimizationLoop(loopOptimization((LoopCommand) innerCommand), temp);
+            else
+                optimizationLoop(innerCommand, temp);
         }
-        command=new LoopCommand(temp);
+        command =new LoopCommand(temp);
         optimizedCommands.add(command);
+    }
+
+    private LoopCommand loopOptimization(LoopCommand loopCommand) {
+        List<Command> temp = new ArrayList<Command>();
+        for (Command innerCommand : loopCommand.getInnerCommands()) {
+            optimizationLoop(innerCommand, temp);
+        }
+        loopCommand = new LoopCommand(temp);
+        return loopCommand;
     }
 }
