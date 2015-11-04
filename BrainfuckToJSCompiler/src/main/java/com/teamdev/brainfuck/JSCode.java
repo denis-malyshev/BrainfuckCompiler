@@ -15,7 +15,7 @@ public class JSCode {
     }
 
     public void endFunction() {
-        workArea.append("\nreturn alert(result);}\n"+functionName+"();");
+        workArea.append("\n\treturn alert(result);\n}\n"+functionName+"();");
     }
 
     public void setBodyFunctions(String bodyFunctions) {
