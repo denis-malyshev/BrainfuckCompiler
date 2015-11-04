@@ -6,6 +6,7 @@
 
     <groupId>com.teamdev.brainfuck</groupId>
     <artifactId>BrainfuckCompiler</artifactId>
+    <packaging>jar</packaging>
     <version>0.1-SNAPSHOT</version>
     <build>
         <plugins>

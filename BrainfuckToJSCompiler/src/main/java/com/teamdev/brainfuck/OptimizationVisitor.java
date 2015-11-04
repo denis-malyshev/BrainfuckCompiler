@@ -55,7 +55,7 @@ public class OptimizationVisitor implements CommandVisitor {
             else
                 optimizationLoop(innerCommand, temp);
         }
-        command =new LoopCommand(temp);
+        command = new LoopCommand(temp);
         optimizedCommands.add(command);
     }
 
