@@ -1,4 +1,4 @@
 out/
 *.idea/
-BrainfuckToJSCompiler.iml
+*.iml
 target/
