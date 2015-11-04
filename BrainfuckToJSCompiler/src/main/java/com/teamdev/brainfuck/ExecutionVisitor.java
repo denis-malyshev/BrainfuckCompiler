@@ -28,7 +28,7 @@ public class ExecutionVisitor implements CommandVisitor {
 
     public void visit(PrintCommand command) {
         for (int i = 0; i < command.getRepeatCounts(); i++) {
-            System.out.print((char) context.getCurrentValue());
+            System.out.print((char)context.getCurrentValue());
         }
     }
 

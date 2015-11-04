@@ -2,7 +2,7 @@ package com.teamdev.brainfuck;
 
 public class ExecutionContext {
 
-    public static final int MEMORY_SIZE = 30000;
+    public static final int MEMORY_SIZE =30000;
 
     private final byte[] memory = new byte[MEMORY_SIZE];
     private int pointer;

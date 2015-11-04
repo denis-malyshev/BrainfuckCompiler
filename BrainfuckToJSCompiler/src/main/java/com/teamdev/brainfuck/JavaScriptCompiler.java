@@ -10,7 +10,7 @@ public class JavaScriptCompiler {
     public static final String PROGRAM ="++++++++[>++++[>++>+++>+++>+<<<<-]" +
             ">+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------" +
             ".>>+.>++.";
-
+            /*">>>++[<++++++++[<[<++>-]>>[>>]+>>+[-[->>+<<<[<[<<]<+>]>[>[>>]]]<[>>[-]]>[>[-<<]>[<+<]]+<<]<[>+<-]>>-]<.[-]>>]";*/
     public void compile(String brainfuckProgram, File outputJavaScriptFile) {
 
         final List<Command> commands = new Parser().parse(brainfuckProgram);
@@ -33,7 +33,7 @@ public class JavaScriptCompiler {
         for (Command command : optimizedCommands) {
             command.accept(jsCodeGenerationVisitor);
         }
-
+        System.out.println(jsCodeGenerationVisitor.getJsCode());
         final JSCode jsCode=new JSCode();
         jsCode.declareFunction("callMessage");
         jsCode.setBodyFunctions(jsCodeGenerationVisitor.getJsCode());
