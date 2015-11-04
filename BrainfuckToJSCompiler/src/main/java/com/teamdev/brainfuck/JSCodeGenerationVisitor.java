@@ -14,9 +14,9 @@ public class JSCodeGenerationVisitor implements CommandVisitor {
     private int tabsCount = 1;
 
     public JSCodeGenerationVisitor() {
-        this.jsCode = "var memory = Array.apply(null, new Array(30000)).map(function () {return 0;});\n" +
-                "var pointer=0;\n" +
-                "var result='';";
+        this.jsCode = "\tvar memory = Array.apply(null, new Array(30000)).map(function () {\n\t\treturn 0;\n\t});\n" +
+                "\tvar pointer=0;\n" +
+                "\tvar result='';";
     }
 
     public String getJsCode() {
@@ -44,9 +44,10 @@ public class JSCodeGenerationVisitor implements CommandVisitor {
     }
 
     public void visit(PrintCommand command) {
-        setTab();
-        for (int i = 0; i < command.getRepeatCounts(); i++)
-            jsCode +=result;
+        for (int i = 0; i < command.getRepeatCounts(); i++) {
+            setTab();
+            jsCode += result;
+        }
     }
 
     public void visit(LoopCommand command) {
